@@ -1,0 +1,5 @@
+= Gitea + asciidoc + pandoc
+
+Gitea + is a docker image of gitea based on the official gitea docker image. Additionally asciidoctor and pandoc 
+packages are installed as external renderer. Additionally the app.ini config template features the config for the external
+renderers.
