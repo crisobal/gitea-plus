@@ -70,7 +70,7 @@ jobs:
       with:
         registry: ${{ env.IMAGE-REPO}}
         username: ${{ secrets.REPO_USER }}
-        password: ${{ secrets.REPO_USER }}
+        password: ${{ secrets.REPO_TOKEN }}
 
     - name: Build and push
       uses: docker/build-push-action@v2
