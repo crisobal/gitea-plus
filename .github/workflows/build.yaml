@@ -27,7 +27,7 @@ on:
   workflow_dispatch:    
 
 env:
-  IMAGE-PATH: base-tooling/gitea-plus
+  IMAGE-PATH: public/gitea-plus
   IMAGE-REPO: gitea.tschirky.ch
 
 defaults:
