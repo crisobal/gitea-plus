@@ -66,7 +66,7 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}
           type=sha
-    - name: Login to DockerHub      
+    - name: Login to docker repo      
       uses: docker/login-action@v2
       with:
         registry: ${{ env.IMAGE-REPO}}
@@ -77,7 +77,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        platforms: linux/amd64,linux/aarm64
+        platforms: linux/amd64,linux/arm64,linux/aarch64
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.my_meta.outputs.tags }}
         labels: ${{ steps.my_meta.outputs.labels }}
