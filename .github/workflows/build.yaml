@@ -51,20 +51,20 @@ jobs:
 
     - name: Docker meta
       id: my_meta # you'll use this in the next step
-      uses: docker/metadata-action@v4
+      uses: docker/metadata-action@v4            
       with:
         # list of Docker images to use as base name for tags
         images: |
           ${IMAGE-PATH}
           # Docker tags based on the following events/attributes
-          tags: |
-            type=schedule
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=sha
+        tags: |
+          type=schedule
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+          type=sha
     - name: Login to DockerHub      
       uses: docker/login-action@v2
       with:
