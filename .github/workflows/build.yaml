@@ -68,7 +68,7 @@ jobs:
     - name: Login to DockerHub      
       uses: docker/login-action@v2
       with:
-        registry: ${IMAGE-REPO}
+        registry: ${{ env.IMAGE-REPO}}
         username: ${{ secrets.REPO_USER }}
         password: ${{ secrets.REPO_USER }}
 
