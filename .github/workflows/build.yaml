@@ -26,8 +26,9 @@ on:
   workflow_dispatch:    
 
 env:
-  DOCKER_IMAGE_REPO: base-tooling/gitea-plus
-  DOCKER_IMAGE_TAG: latest  
+  IMAGE_REPO: base-tooling/gitea-plus
+  IMAGE_TAG: latest
+  IMAGE-ARCH: amd64
 
 defaults:
   run:
@@ -51,6 +52,9 @@ jobs:
           export DOCKER_PUSH=1
         fi
         echo "$REGISTRY_TOKEN" | docker login -u="$REGISTRY_USERNAME" "$REGISTRY" --password-stdin
+        TAG=${REGISTRY}/${IMAGE_REPO}:${IMAGE_TAG}-${IMAGE-ARCH}
+        docker build . -t ${TAG}
+        docker push ${TAG}
         ls -l
         
 
