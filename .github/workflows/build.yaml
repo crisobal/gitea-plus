@@ -1,0 +1,57 @@
+# based on example from 
+#  - https://docs.docker.com/build/ci/github-actions/examples/
+#  - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+#
+# See also: 
+# - https://github.com/actions/checkout
+# - https://github.com/actions/cache
+# 
+name: ci
+
+on:
+  push:
+    branches:
+    - '**'
+    tags-ignore:
+    - '**'
+    # ignore github repo settings and all readme adoc changes
+    paths-ignore:
+    - '.github/*.yml'
+    - '**/*.adoc'
+    
+  # once every week sunday 03:22
+  schedule:   
+    - cron: '22 03 * * 0'
+  pull_request:
+  workflow_dispatch:    
+
+env:
+  DOCKER_IMAGE_REPO: base-tooling/gitea-plus
+  DOCKER_IMAGE_TAG: latest  
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v3 
+   
+    - name: Build ${{ env.DOCKER_IMAGE_REPO }}:${{ env.DOCKER_IMAGE_TAG }}
+      env:
+        REGISTRY: gitea.tschirky.ch
+        REGISTRY_USERNAME: ${{ secrets.REPO_USER }}
+        REGISTRY_TOKEN: ${{ secrets.REPO_TOKEN }}        
+      run: |
+        if [ "$GITHUB_REF" == "refs/heads/main" ]; then
+          export DOCKER_PUSH=1
+        fi
+        echo "$REGISTRY_TOKEN" | docker login -u="$REGISTRY_USERNAME" "$REGISTRY" --password-stdin
+        ls -l
+        
+
+  
