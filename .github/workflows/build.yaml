@@ -27,8 +27,6 @@ on:
 
 env:
   IMAGE-PATH: base-tooling/gitea-plus
-  IMAGE_TAG: latest
-  IMAGE-ARCH: amd64
   IMAGE-REPO: gitea.tschirky.ch
 
 defaults:
@@ -57,7 +55,7 @@ jobs:
       with:
         # list of Docker images to use as base name for tags
         images: |
-          gitea-plus
+          ${IMAGE-PATH}
           # Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -70,7 +68,7 @@ jobs:
     - name: Login to DockerHub      
       uses: docker/login-action@v2
       with:
-        registry: ${{ IMAGE-REPO }}
+        registry: ${IMAGE-REPO}
         username: ${{ secrets.REPO_USER }}
         password: ${{ secrets.REPO_USER }}
 
