@@ -1,4 +1,4 @@
-FROM docker.io/gitea/gitea:1.19-dev
+FROM docker.io/gitea/gitea:1.19.0-rc1
 LABEL maintainer="crispin@tschirky.ch"
 
 EXPOSE 22 3000
