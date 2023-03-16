@@ -21,8 +21,8 @@ on:
     - '**/*.adoc'
     
   # once every week sunday 03:22
-  schedule:   
-    - cron: '22 03 * * 0'
+  #schedule:
+  #  - cron: '22 03 * * 0'
   pull_request:
   workflow_dispatch:    
 
