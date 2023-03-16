@@ -27,8 +27,11 @@ on:
   workflow_dispatch:    
 
 env:
-  IMAGE-PATH: public/gitea-plus
-  IMAGE-REPO: gitea.tschirky.ch
+  # IMAGE-PATH: public/gitea-plus
+  # IMAGE-REPO: gitea.tschirky.ch
+  IMAGE-PATH: ${{ github.repository }}
+  IMAGE-REPO: ghcr.io
+  
 
 defaults:
   run:
@@ -70,8 +73,11 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: ${{ env.IMAGE-REPO}}
-        username: ${{ secrets.REPO_USER }}
-        password: ${{ secrets.REPO_TOKEN }}
+        #username: ${{ secrets.REPO_USER }}
+        #password: ${{ secrets.REPO_TOKEN }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
 
     - name: Build and push
       uses: docker/build-push-action@v2
