@@ -1,5 +1,13 @@
-FROM docker.io/gitea/gitea:1.19.0-rc0-linux-amd64
-LABEL maintainer="crispin@tschirky.ch"
+FROM docker.io/gitea/gitea:1.19.0
+LABEL maintainer="crispin@tschirky.ch" \
+      org.opencontainers.image.base.name="docker.io/gitea/gitea" \      
+      org.opencontainers.image.description="Gitea including adoc and md rendering" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="1.19.0" \
+      org.opencontainers.image.title="gitea-plus" \
+      org.opencontainers.image.vendor="fhr.ch" 
+      
+      
 
 EXPOSE 22 3000
 

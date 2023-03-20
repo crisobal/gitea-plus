@@ -21,14 +21,17 @@ on:
     - '**/*.adoc'
     
   # once every week sunday 03:22
-  schedule:   
-    - cron: '22 03 * * 0'
+  #schedule:
+  #  - cron: '22 03 * * 0'
   pull_request:
   workflow_dispatch:    
 
 env:
-  IMAGE-PATH: public/gitea-plus
-  IMAGE-REPO: gitea.tschirky.ch
+  # IMAGE-PATH: public/gitea-plus
+  # IMAGE-REPO: gitea.tschirky.ch
+  IMAGE-PATH: ${{ github.repository }}
+  IMAGE-REPO: ghcr.io
+  
 
 defaults:
   run:
@@ -66,18 +69,21 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}
           type=sha
-    - name: Login to DockerHub      
+    - name: Login to docker repo      
       uses: docker/login-action@v2
       with:
         registry: ${{ env.IMAGE-REPO}}
-        username: ${{ secrets.REPO_USER }}
-        password: ${{ secrets.REPO_TOKEN }}
+        #username: ${{ secrets.REPO_USER }}
+        #password: ${{ secrets.REPO_TOKEN }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
 
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
         context: .
-        platforms: linux/amd64,linux/aarm64
+        platforms: linux/amd64,linux/arm64
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.my_meta.outputs.tags }}
         labels: ${{ steps.my_meta.outputs.labels }}
