@@ -16,8 +16,6 @@ RUN apk --no-cache add \
     pandoc \
     && rm -rf /var/cache/apk/*
 
-USER 1000:1000
-
 ENV GITEA_CUSTOM /data/gitea
 
 VOLUME ["/data"]
@@ -27,3 +25,5 @@ CMD ["/bin/s6-svscan", "/etc/s6"]
 
 COPY docker/app.ini_rootless /etc/templates/app.ini
 RUN chmod 644 /etc/templates/app.ini
+
+USER 1000:1000
