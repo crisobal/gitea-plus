@@ -88,7 +88,7 @@ jobs:
         tags: ${{ steps.my_meta.outputs.tags }}
         labels: ${{ steps.my_meta.outputs.labels }}
 
-   build-rootless:
+  build-rootless:
     runs-on: ubuntu-latest
 
     steps:
