@@ -1,9 +1,9 @@
-FROM docker.io/gitea/gitea:1.21.10
+FROM docker.io/gitea/gitea:1.21.11
 LABEL maintainer="crispin@tschirky.ch" \
       org.opencontainers.image.base.name="docker.io/gitea/gitea" \      
       org.opencontainers.image.description="Gitea including adoc and md rendering" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.21.10" \
+      org.opencontainers.image.ref.name="1.21.11" \
       org.opencontainers.image.title="gitea-plus" \
       org.opencontainers.image.vendor="fhr.ch" 
       
