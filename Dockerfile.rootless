@@ -1,4 +1,4 @@
-FROM docker.io/gitea/gitea:1.20.0-rootless
+FROM docker.io/gitea/gitea:1.22.0-rootless
 LABEL maintainer="crispin@tschirky.ch" \
       org.opencontainers.image.base.name="docker.io/gitea/gitea" \      
       org.opencontainers.image.description="Gitea including adoc and md rendering" \
